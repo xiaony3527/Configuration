@@ -213,18 +213,21 @@ rules:
     - RULE-SET,AWAvenue-Ads,REJECT
 
     # 域名-直连优先
-    - GEOSITE,onedrive,DIRECT
     - DOMAIN-SUFFIX,sider.ai,节点选择
 
     # 域名-代理规则
     - GEOSITE,gfw,节点选择
     - GEOSITE,telegram,节点选择
+    - GEOSITE,onedrive,节点选择
 
     # IP-代理规则
+    - GEPIP,telegram,节点选择
 
     # 包名-代理规则
+    - PROCESS-NAME,org.telegram.messenger,节点选择
 
     # 进程-代理规则
+    - PROCESS-NAME,telegram.exe,节点选择
 
     # 未命中规则
     - MATCH,DIRECT
