@@ -1,0 +1,241 @@
+proxy-providers:
+    1.lmspeed:
+        type: http
+        path: ./proxy_provider/LmSpeed.yaml
+        url: https://linka.lmscunb.cc:2087/api/v1/client/subscribe?token=54b0c4fa3cc0e162871fff26bca92ef9
+        interval: 21600
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 300
+            timeout: 300
+            lazy: true
+            expected-status: 204
+        override:
+            additional-prefix: '龙猫云 | '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+        exclude-type: 'ss|http'
+
+    2.CherryLink:
+        type: http
+        path: ./proxy_provider/CherryLink.yaml
+        url: https://cherry.azureedge.net/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
+        interval: 21600
+        proxy: 节点选择
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 300
+            timeout: 300
+            lazy: true
+            expected-status: 204
+        override:
+            additional-prefix: 'CherryLink| '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+
+    3.qcjsd:
+        type: http
+        path: ./proxy_provider/qcjsd.yaml
+        url: https://8f3ff21d-7ea5-452d-b526-efc8c1b55e37.qcjsd.org/api/v1/client/subscribe?token=527410916ba2a4c62219d022ed249e21
+        interval: 21600
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 300
+            timeout: 300
+            lazy: true
+            expected-status: 204
+        override:
+            additional-prefix: '倾城极速 | '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+# Global Config
+mixed-port: 7890
+allow-lan: true
+mode: rule
+global-ua: clash-verge/v2.2.3
+geodata-mode: true
+geodata-loader: standard
+unified-delay: true
+log-level: warning
+ipv6: false
+tcp-concurrent: true
+enable-process: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+keep-alive-interval: 15
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+    geoip: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat'
+    geosite: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat'
+    mmdb: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb'
+    asn: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb'
+profile:
+    store-selected: true
+    store-fake-ip: true
+tun:
+    enable: true
+    device: ClashVergeREV
+    stack: system
+    mtu: 1500
+    dns-hijack:
+        - 'any:53'
+        - 'tcp://any:53'
+    auto-route: true
+    auto-detect-interface: true
+dns:
+    enable: true
+    ipv6: false
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver:
+        - https://doh.pub/dns-query
+        - https://dns.alidns.com/dns-query
+        - 223.5.5.5
+        - 119.29.29.29
+    fallback:
+        - tls://8.8.4.4:853 # 走代理的DoT
+        - https://dns.google/dns-query # 走代理的DoH
+    nameserver-policy:
+    'geosite:cn,private': ['https://dns.alidns.com/dns-query'] # 国内域名直连DNS
+    'geosite:geolocation-!cn': ['tls://8.8.4.4:853'] # 国外域名代理DNS
+    fallback-filter:
+    geoip: true # 非中国IP才用fallback
+    ipcidr:
+        - 0.0.0.0/32 # 占位符（实际由geoip控制）
+    fake-ip-filter:
+        - '*'
+        - '+.lan'
+        - 'connect.rom.miui.com'
+        - '+.miwifi.com'
+        - '+.ntp.org'
+        - '+.u-tools.cn'
+        - '+.mediatek.com'
+        - '+.cfprefer1.xyz'
+        - '+.wetab.link'
+        - '+.tyasaka.xyz'
+        # QQ
+        - 'localhost.ptlogin2.qq.com'
+        - 'localhost.sec.qq.com'
+        # WeChat
+        - 'localhost.work.weixin.qq.com'
+        - '+.weixin.qq.com'
+        - '+.wechat.com'
+        # Windows
+        - 'time.windows.com'
+        - '+.msftconnecttest.com'
+        - '+.msftncsi.com'
+        - '+.wpsmail.net'
+        - '+.henzanapp.com'
+        - '+.pconline.com.cn'
+
+proxy-groups:
+    - name: '节点选择'
+      type: select
+      proxies:
+          [
+              DIRECT,
+              自动选择,
+              香港-负载均衡,
+              日本-负载均衡,
+              新加坡-负载均衡,
+              美国-负载均衡,
+          ]
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      max-failed-times: 5
+      expected-status: 204
+      include-all: true
+    - name: '自动选择'
+      type: url-test
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      max-failed-times: 5
+      lazy: false
+      expected-status: 204
+      include-all: true
+    - name: '香港-负载均衡'
+      type: load-balance
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      expected-status: 204
+      strategy: sticky-sessions
+      include-all: true
+      filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰)'
+    - name: '日本-负载均衡'
+      type: load-balance
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      expected-status: 204
+      strategy: sticky-sessions
+      include-all: true
+      filter: '(?i)(日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵)'
+    - name: '新加坡-负载均衡'
+      type: load-balance
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      expected-status: 204
+      strategy: sticky-sessions
+      include-all: true
+      filter: '(?i)(新加坡|狮城|SG|Singapore|🇸🇬)'
+    - name: '美国-负载均衡'
+      type: load-balance
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 300
+      expected-status: 204
+      strategy: sticky-sessions
+      include-all: true
+      filter: '(?i)(美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+
+rule-providers:
+    AWAvenue-Ads:
+        type: http
+        behavior: domain
+        format: yaml
+        path: ./rule_providers/AWAvenue-Ads-Rule-Clash.yaml
+        #此处“/rule_providers”自行参考
+        url:
+            - 'https://script.cx.ms/awavenue/AWAvenue-Ads-Rule-Clash.yaml'
+            - 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml'
+            - 'https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml'
+        interval: 86400
+
+rules:
+    # 拦截规则
+    - GEOSITE,category-ads-all,REJECT
+    - GEOSITE,win-extra,REJECT
+    - GEOSITE,win-spy,REJECT
+    - RULE-SET,AWAvenue-Ads-Rule-Clash,REJECT
+
+    # 域名-直连优先
+    - GEOSITE,steam@cn,DIRECT
+    - GEOSITE,microsoft@cn,DIRECT
+    - GEOSITE,apple-cn,DIRECT
+    - GEOSITE,category-games-cn,DIRECT
+    - GEOSITE,onedrive,DIRECT
+
+    # 域名-代理规则
+    - GEOSITE,github,手动选择
+    - GEOSITE,google,手动选择
+    - GEOSITE,youtube,手动选择
+    - GEOSITE,twitter,手动选择
+    - GEOSITE,facebook,手动选择
+    - GEOSITE,telegram,手动选择
+    - GEOSITE,gfw,手动选择
+
+    # IP-代理规则
+    - GEOIP,google,手动选择
+    - GEOIP,telegram,手动选择
+    - GEOIP,twitter,手动选择
+    - GEOIP,fastly,手动选择
+
+    # 包名-代理规则
+
+    # 进程-代理规则
+
+    # 未命中规则
+    - MATCH,DIRECT
