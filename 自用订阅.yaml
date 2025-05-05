@@ -209,6 +209,7 @@ rules:
 
     # 域名-直连优先
     - GEOSITE,onedrive,DIRECT
+    - DOMAIN-SUFFIX,sider.ai,节点选择
 
     # 域名-代理规则
     - GEOSITE,gfw,节点选择
