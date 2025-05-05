@@ -213,6 +213,7 @@ rules:
 
     # 域名-代理规则
     - GEOSITE,gfw,节点选择
+    - GEOSITE,telegram,节点选择
 
     # IP-代理规则
 
