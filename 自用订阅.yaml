@@ -225,7 +225,6 @@ rules:
     # IP-代理规则
 
     # 包名-代理规则
-    - PROCESS-NAME,org.telegram.messenger,节点选择
 
     # 进程-代理规则
     - PROCESS-NAME,telegram.exe,节点选择
