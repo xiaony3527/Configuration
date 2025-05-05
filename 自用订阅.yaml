@@ -198,10 +198,7 @@ rule-providers:
         format: yaml
         path: ./rule_providers/AWAvenue-Ads-Rule-Clash.yaml
         #此处“/rule_providers”自行参考
-        url:
-            - 'https://script.cx.ms/awavenue/AWAvenue-Ads-Rule-Clash.yaml'
-            - 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml'
-            - 'https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml'
+        url: 'https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml'
         interval: 86400
 
 rules:
