@@ -223,8 +223,6 @@ rules:
     - GEOSITE,google,节点选择
 
     # IP-代理规则
-    - GEOIP,telegram,节点选择
-    - GEOIP,googe,节点选择
 
     # 包名-代理规则
     - PROCESS-NAME,org.telegram.messenger,节点选择
