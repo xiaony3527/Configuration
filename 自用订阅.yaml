@@ -203,9 +203,6 @@ rule-providers:
 
 rules:
     # 拦截规则
-    - GEOSITE,category-ads-all,REJECT
-    - GEOSITE,win-extra,REJECT
-    - GEOSITE,win-spy,REJECT
     - RULE-SET,AWAvenue-Ads-Rule-Clash,REJECT
 
     # 域名-直连优先
