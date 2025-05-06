@@ -42,11 +42,12 @@ dns:
 # The above configuration can prevent DNS leakage, modify with caution
 
 proxy-providers:
-    lmspeed:
+    1.lmspeed:
         type: http
         path: ./proxy_provider/LmSpeed.yaml
         url: https://linka.lmscunb.cc:2087/api/v1/client/subscribe?token=54b0c4fa3cc0e162871fff26bca92ef9
         interval: 21600
+        proxy: 🚀 节点选择
         health-check:
             enable: true
             url: http://www.gstatic.com/generate_204
@@ -60,12 +61,12 @@ proxy-providers:
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
         exclude-type: 'ss|http'
 
-    CherryLink:
+    2.CherryLink:
         type: http
         path: ./proxy_provider/CherryLink.yaml
         url: https://cherry.azureedge.net/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
         interval: 21600
-        proxy: 节点选择
+        proxy: 🚀 节点选择
         health-check:
             enable: true
             url: http://www.gstatic.com/generate_204
@@ -78,7 +79,7 @@ proxy-providers:
         filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
-    qcjsd:
+    3.qcjsd:
         type: http
         path: ./proxy_provider/qcjsd.yaml
         url: https://8f3ff21d-7ea5-452d-b526-efc8c1b55e37.qcjsd.org/api/v1/client/subscribe?token=527410916ba2a4c62219d022ed249e21
@@ -98,8 +99,7 @@ proxy-providers:
 proxy-groups:
     - name: 🚀 节点选择
       type: select
-      proxies:
-          - ♻️ 自动选择
+      proxies: [♻️ 自动选择]
       include-all: true
 
     - name: ♻️ 自动选择
@@ -111,24 +111,15 @@ proxy-groups:
 
     - name: 🎯 全球直连
       type: select
-      proxies:
-          - DIRECT
-          - 🚀 节点选择
-          - ♻️ 自动选择
+      proxies: [DIRECT, 🚀 节点选择, ♻️ 自动选择]
 
     - name: 🛑 全球拦截
       type: select
-      proxies:
-          - REJECT
-          - DIRECT
+      proxies: [REJECT, DIRECT]
 
     - name: 🐟 漏网之鱼
       type: select
-      proxies:
-          - 🚀 节点选择
-          - 🎯 全球直连
-          - 🛑 全球拦截
-          - ♻️ 自动选择
+      proxies: [🚀 节点选择, 🎯 全球直连, 🛑 全球拦截, ♻️ 自动选择]
       include-all: true
 rule-providers:
     direct-list:
