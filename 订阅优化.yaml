@@ -1,0 +1,178 @@
+mode: rule
+ipv6: false
+log-level: info
+mixed-port: 10000
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+    geoip: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat'
+    geosite: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat'
+geodata-loader: memconservative
+profile:
+    store-selected: true
+    store-fake-ip: true
+
+# 以下配置可以防止DNS泄露，谨慎修改
+# The following configuration can prevent DNS leakage, modify with caution
+dns:
+    enable: true
+    ipv6: false
+    prefer-h3: true
+    listen: 0.0.0.0:1051
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    nameserver:
+        - tls://8.8.4.4
+        - tls://1.1.1.1
+    nameserver-policy:
+        'geosite:cn':
+            - system
+            - 180.76.76.76
+            - 223.5.5.5
+    proxy-server-nameserver:
+        - 180.76.76.76
+        - 202.175.3.3
+        - 223.5.5.5
+# 以上配置可以防止DNS泄露，谨慎修改
+# The above configuration can prevent DNS leakage, modify with caution
+
+proxy-providers:
+    lmspeed:
+        type: http
+        path: ./proxy_provider/LmSpeed.yaml
+        url: https://linka.lmscunb.cc:2087/api/v1/client/subscribe?token=54b0c4fa3cc0e162871fff26bca92ef9
+        interval: 21600
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 1800
+            timeout: 300
+            lazy: false
+            expected-status: 204
+        override:
+            additional-prefix: '龙猫云 | '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+        exclude-type: 'ss|http'
+
+    CherryLink:
+        type: http
+        path: ./proxy_provider/CherryLink.yaml
+        url: https://cherry.azureedge.net/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
+        interval: 21600
+        proxy: 节点选择
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 1800
+            timeout: 300
+            lazy: false
+            expected-status: 204
+        override:
+            additional-prefix: 'CherryLink| '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+
+    qcjsd:
+        type: http
+        path: ./proxy_provider/qcjsd.yaml
+        url: https://8f3ff21d-7ea5-452d-b526-efc8c1b55e37.qcjsd.org/api/v1/client/subscribe?token=527410916ba2a4c62219d022ed249e21
+        interval: 21600
+        health-check:
+            enable: true
+            url: http://www.gstatic.com/generate_204
+            interval: 1800
+            timeout: 300
+            lazy: false
+            expected-status: 204
+        override:
+            additional-prefix: '倾城极速 | '
+        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+
+proxy-groups:
+    - name: 🚀 节点选择
+      type: select
+      proxies:
+          - ♻️ 自动选择
+      include-all: true
+
+    - name: ♻️ 自动选择
+      type: url-test
+      url: https://www.google.com/blank.html
+      interval: 600
+      tolerance: 50
+      include-all: true
+
+    - name: 🎯 全球直连
+      type: select
+      proxies:
+          - DIRECT
+          - 🚀 节点选择
+          - ♻️ 自动选择
+
+    - name: 🛑 全球拦截
+      type: select
+      proxies:
+          - REJECT
+          - DIRECT
+
+    - name: 🐟 漏网之鱼
+      type: select
+      proxies:
+          - 🚀 节点选择
+          - 🎯 全球直连
+          - 🛑 全球拦截
+          - ♻️ 自动选择
+      include-all: true
+rule-providers:
+    direct-list:
+        type: http
+        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/direct-list.txt
+        interval: 86400
+        path: ./ruleset/direct-list.txt
+        behavior: domain
+    AWAvenue:
+        type: http
+        url: https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml
+        interval: 86400
+        path: ./ruleset/AWAvenue.yaml
+        behavior: domain
+    applications:
+        type: http
+        behavior: classical
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt'
+        path: ./ruleset/applications.yaml
+        interval: 86400
+    lancidr:
+        type: http
+        behavior: ipcidr
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt'
+        path: ./ruleset/lancidr.yaml
+        interval: 86400
+
+rules:
+    # 广告拦截
+    - RULE-SET,AWAvenue,🛑 全球拦截
+
+    # 包名| 进程 规则
+    - PROCESS-NAME,telegram.exe,🎯 全球直连
+    - RULE-SET,applications,🎯 全球直连
+
+    # 直连
+    - GEOSITE,cn,🎯 全球直连
+    - RULE-SET,direct-list,🎯 全球直连
+    - RULE-SET,lancidr,🎯 全球直连
+    - GEOSITE,steam@cn,🎯 全球直连
+    - GEOSITE,private,🎯 全球直连
+
+    # 走代理
+    - GEOSITE,gfw,🚀 节点选择
+
+    # 默认
+    - MATCH,🐟 漏网之鱼
