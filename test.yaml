@@ -150,7 +150,7 @@ rule-providers:
 rules:
     # 广告拦截
     - RULE-SET,AWAvenue,🛑 全球拦截
-    - GEOSITE,category-ads,🛑 全球拦截
+    - GEOSITE,category-ads-all,🛑 全球拦截
 
     # 包名| 进程 规则
     - PROCESS-NAME,telegram.exe,🎯 全球直连
