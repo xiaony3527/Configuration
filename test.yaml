@@ -163,7 +163,7 @@ rules:
     - GEOSITE,private,🎯 全球直连
     - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🎯 全球直连
     - DOMAIN-SUFFIX,googleapis.cn,🎯 全球直连
-    - IP-CIDR,8.153.39.148/24,🎯 全球直连
+    - IP-SUFFIX,8.153.39.148/24,🎯 全球直连
 
     # 走代理
     - GEOSITE,gfw,🚀 节点选择
