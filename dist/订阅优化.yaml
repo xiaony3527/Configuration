@@ -155,6 +155,7 @@ rules:
     - PROCESS-NAME,telegram.exe,🎯 全球直连
     - PROCESS-NAME,verysync.exe,🎯 全球直连
     - PROCESS-NAME,qq.exe,🎯 全球直连
+    - PROCESS-NAME,com.tencent.qq,🎯 全球直连
     - PROCESS-NAME,wechat.exe,🎯 全球直连
     - RULE-SET,applications,🎯 全球直连
 
