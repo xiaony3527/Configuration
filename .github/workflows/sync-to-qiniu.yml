@@ -1,35 +1,34 @@
-name: Upload Website to Qiniu
+name: upload-to-qiniu
 
 on:
     push:
         branches:
             - master
-        paths:
-            - 'dist/**' # 只在dist目录内容变化时触发
 
 jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout code
-              uses: actions/checkout@master
-
-            - name: Upload to Qiniu Cloud
-              uses: hujiulong/action-qiniu-upload@master
+            - uses: actions/checkout@master
+            - uses: hujiulong/action-qiniu-upload@master
               with:
-                  # 七牛云认证信息
+                  # 你的七牛访问密钥（必填）
                   access_key: ${{ secrets.QINIU_ACCESS_KEY }}
+
+                  # 你的七牛私有密钥（必填）
                   secret_key: ${{ secrets.QINIU_SECRET_KEY }}
+
+                  # 存储桶名称（必填）
                   bucket: ${{ secrets.QINIU_BUCKET }}
 
-                  # 上传配置
-                  source_dir: 'dist' # 上传本地dist目录内容
-                  dest_dir: '/static' # 上传到七牛云的/static目录下
-                  ignore_source_map: true # 忽略source map文件
+                  # 要上传到存储桶的本地目录（或文件）
+                  # 默认值: './'
+                  source_dir: 'dist'
 
-                  # 高级配置（可选）
-                  overwrite: true # 覆盖已存在文件
-                  ignore_hidden: true # 忽略隐藏文件
-                  ignore_pattern: | # 忽略特定文件
-                      *.log
-                      temp/*
+                  # 存储桶内的目标目录（即文件键前缀）
+                  # 默认值: '/'
+                  dest_dir: '/dist'
+
+                  # 是否忽略源映射文件
+                  # 默认值: true
+                  ignore_source_map: true
