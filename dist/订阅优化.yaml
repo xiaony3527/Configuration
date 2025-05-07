@@ -153,6 +153,7 @@ rules:
 
     # 包名| 进程 规则
     - PROCESS-NAME,telegram.exe,🎯 全球直连
+    - PROCESS-NAME,verysync.exe,🎯 全球直连
     - RULE-SET,applications,🎯 全球直连
 
     # 直连
