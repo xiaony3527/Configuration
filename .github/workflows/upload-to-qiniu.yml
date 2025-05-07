@@ -4,31 +4,28 @@ on:
     push:
         branches:
             - main
+    workflow_dispatch: # 允许手动触发
 
 jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@master
-            - uses: hujiulong/action-qiniu-upload@master
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
               with:
-                  # 你的七牛访问密钥（必填）
-                  access_key: ${{ secrets.QINIU_ACCESS_KEY }}
+                  python-version: '3.8'
 
-                  # 你的七牛私有密钥（必填）
-                  secret_key: ${{ secrets.QINIU_SECRET_KEY }}
+            - name: Install dependencies
+              run: |
+                  pip install qiniu
 
-                  # 存储桶名称（必填）
-                  bucket: ${{ secrets.QINIU_BUCKET }}
-
-                  # 要上传到存储桶的本地目录（或文件）
-                  # 默认值: './'
-                  source_dir: 'dist'
-
-                  # 存储桶内的目标目录（即文件键前缀）
-                  # 默认值: '/'
-                  dest_dir: '/dist'
-
-                  # 是否忽略源映射文件
-                  # 默认值: true
-                  ignore_source_map: true
+            - name: Run upload script
+              env:
+                  QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+                  QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+                  QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
+              run: |
+                  python upload_to_qiniu.py
