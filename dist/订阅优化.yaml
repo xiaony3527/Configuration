@@ -159,7 +159,7 @@ rules:
     - PROCESS-NAME,com.tencent.qq,🎯 全球直连 # QQ APP
     - PROCESS-NAME,wechat.exe,🎯 全球直连 # 微信PC端
     - PROCESS-NAME,com.tencent.wechat,🎯 全球直连 # 微信APP
-    - PROCESS-NAME,Battle.net.exe,🎯 全球直连 # 战网客户端
+    - PROCESS-NAME,Battle.net.exe,🚀 节点选择 # 战网客户端
     - PROCESS-NAME,Agent.exe,🚀 节点选择 # 战网客户端-下载|好友服务
     - PROCESS-NAME,xunyou.exe,🎯 全球直连
     - PROCESS-NAME,leigod.exe,🎯 全球直连
