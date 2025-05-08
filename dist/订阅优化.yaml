@@ -38,6 +38,10 @@ dns:
         - 180.76.76.76
         - 202.175.3.3
         - 223.5.5.5
+    fake-ip-filter:
+        - '*.lan'
+        - '+.leigod.com'
+        - '+.wyjsq.com'
 # 以上配置可以防止DNS泄露，谨慎修改
 # The above configuration can prevent DNS leakage, modify with caution
 
