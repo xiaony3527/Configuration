@@ -152,11 +152,13 @@ rules:
     - RULE-SET,AWAvenue,🛑 全球拦截
 
     # 包名| 进程 规则
-    - PROCESS-NAME,telegram.exe,🎯 全球直连
-    - PROCESS-NAME,verysync.exe,🎯 全球直连
-    - PROCESS-NAME,qq.exe,🎯 全球直连
-    - PROCESS-NAME,com.tencent.qq,🎯 全球直连
-    - PROCESS-NAME,wechat.exe,🎯 全球直连
+    - PROCESS-NAME,telegram.exe,🎯 全球直连 # 电报
+    - PROCESS-NAME,verysync.exe,🎯 全球直连 # 威力同步
+    - PROCESS-NAME,qq.exe,🎯 全球直连 # QQ PC端
+    - PROCESS-NAME,com.tencent.qq,🎯 全球直连 # QQ APP
+    - PROCESS-NAME,wechat.exe,🎯 全球直连 # 微信PC端
+    - PROCESS-NAME,com.tencent.wechat,🎯 全球直连 # 微信APP
+    - PROCESS-NAME,Battle.net.exe,🎯 全球直连 # 战网客户端
     - RULE-SET,applications,🎯 全球直连
 
     # 直连
