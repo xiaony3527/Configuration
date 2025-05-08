@@ -159,6 +159,7 @@ rules:
     - PROCESS-NAME,wechat.exe,🎯 全球直连 # 微信PC端
     - PROCESS-NAME,com.tencent.wechat,🎯 全球直连 # 微信APP
     - PROCESS-NAME,Battle.net.exe,🎯 全球直连 # 战网客户端
+    - PROCESS-NAME,Agent.exe,🎯 全球直连 # 战网客户端
     - RULE-SET,applications,🎯 全球直连
 
     # 直连
