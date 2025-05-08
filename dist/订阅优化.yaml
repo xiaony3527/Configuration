@@ -61,7 +61,6 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '龙猫云 | '
-        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
         exclude-type: 'ss|http'
 
@@ -80,7 +79,6 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: 'CherryLink| '
-        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
     3.qcjsd:
@@ -97,7 +95,6 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '倾城极速 | '
-        filter: '(?i)(香港|港|HK|Hong Kong|🇭🇰|日本|JP|Japan|Tokyo|Osaka|大阪|东京|🇯🇵|新加坡|狮城|SG|Singapore|🇸🇬|美国|美|US|USA|United States|America|Los Angeles|New York|Washington|Dallas|纽约|洛杉矶|西雅图|🇺🇸)'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
 proxy-groups:
@@ -163,7 +160,7 @@ rules:
     - PROCESS-NAME,wechat.exe,🎯 全球直连 # 微信PC端
     - PROCESS-NAME,com.tencent.wechat,🎯 全球直连 # 微信APP
     - PROCESS-NAME,Battle.net.exe,🎯 全球直连 # 战网客户端
-    - PROCESS-NAME,Agent.exe,🎯 全球直连 # 战网客户端
+    - PROCESS-NAME,Agent.exe,🚀 节点选择 # 战网客户端-下载|好友服务
     - RULE-SET,applications,🎯 全球直连
 
     # 直连
