@@ -158,6 +158,7 @@ rules:
     - PROCESS-NAME,Battle.net.exe,🚀 节点选择 # 战网客户端
     - PROCESS-NAME,Agent.exe,🚀 节点选择 # 战网客户端-下载|好友服务
     - PROCESS-NAME,SC2Editor_x64.exe,🚀 节点选择
+    - PROCESS-NAME,SC2_x64.exe,🚀 节点选择
     - RULE-SET,applications,🎯 全球直连
 
     # 直连
