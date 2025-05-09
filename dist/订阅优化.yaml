@@ -161,6 +161,7 @@ rules:
     - PROCESS-NAME,com.tencent.wechat,🎯 全球直连 # 微信APP
     - PROCESS-NAME,Battle.net.exe,🚀 节点选择 # 战网客户端
     - PROCESS-NAME,Agent.exe,🚀 节点选择 # 战网客户端-下载|好友服务
+    - PROCESS-NAME,SC2Editor_x64.exe,🚀 节点选择
     - PROCESS-NAME,xunyou.exe,🎯 全球直连
     - PROCESS-NAME,leigod.exe,🎯 全球直连
     - RULE-SET,applications,🎯 全球直连
