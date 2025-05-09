@@ -173,6 +173,7 @@ rules:
     - GEOSITE,gfw,🚀 节点选择
     - DOMAIN-SUFFIX,speedtest.net,🚀 节点选择
     - DOMAIN-SUFFIX,sider.ai,🚀 节点选择
+    - DOMAIN-SUFFIX,greasyfork.org,🚀 节点选择
 
     # 默认
     - MATCH,🐟 漏网之鱼
