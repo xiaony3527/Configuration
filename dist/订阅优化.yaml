@@ -171,6 +171,7 @@ rules:
 
     # 走代理
     - GEOSITE,gfw,🚀 节点选择
+    - DOMAIN-SUFFIX,speedtest.net,🚀 节点选择
 
     # 默认
     - MATCH,🐟 漏网之鱼
