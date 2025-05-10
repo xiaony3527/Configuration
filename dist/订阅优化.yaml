@@ -135,12 +135,6 @@ rule-providers:
         interval: 86400
         path: ./ruleset/AWAvenue.yaml
         behavior: domain
-    applications:
-        type: http
-        behavior: classical
-        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt'
-        path: ./ruleset/applications.yaml
-        interval: 86400
     lancidr:
         type: http
         behavior: ipcidr
@@ -159,7 +153,6 @@ rules:
     - PROCESS-NAME,Agent.exe,🚀 节点选择 # 战网客户端-下载|好友服务
     - PROCESS-NAME,SC2Editor_x64.exe,🚀 节点选择
     - PROCESS-NAME,SC2_x64.exe,🚀 节点选择
-    - RULE-SET,applications,🎯 全球直连
 
     # 直连
     - GEOSITE,cn,🎯 全球直连
