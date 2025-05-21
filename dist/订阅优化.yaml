@@ -124,6 +124,70 @@ rule-providers:
         url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt'
         path: ./ruleset/lancidr.yaml
         interval: 86400
+    ADD-DIRECT:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvbmdDY2hhby9HbG9iYWxNZWRpYS1DbGFzaFJ1bGUvcmVmcy9oZWFkcy9tYWluL0FERC1ESVJFQ1QubGlzdA',
+            path: ./ruleset/rule-provider_ADD-DIRECT.yaml,
+            interval: 86400,
+        }
+    GoogleFCM:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUnVsZXNldC9Hb29nbGVGQ00ubGlzdA',
+            path: ./ruleset/rule-provider_GoogleFCM.yaml,
+            interval: 86400,
+        }
+    GoogleCN:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlQ04ubGlzdA',
+            path: ./ruleset/rule-provider_GoogleCN.yaml,
+            interval: 86400,
+        }
+    Microsoft:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvTWljcm9zb2Z0Lmxpc3Q',
+            path: ./ruleset/rule-provider_Microsoft.yaml,
+            interval: 86400,
+        }
+    ChinaDomain:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA',
+            path: ./ruleset/rule-provider_ChinaDomain.yaml,
+            interval: 86400,
+        }
+    ChinaCompanyIp:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFDb21wYW55SXAubGlzdA',
+            path: ./ruleset/rule-provider_ChinaCompanyIp.yaml,
+            interval: 86400,
+        }
+    ProxyMedia:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlNZWRpYS5saXN0',
+            path: ./ruleset/rule-provider_ProxyMedia.yaml,
+            interval: 86400,
+        }
+    ProxyLite:
+        {
+            type: http,
+            behavior: classical,
+            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlMaXRlLmxpc3Q',
+            path: ./ruleset/rule-provider_ProxyLite.yaml,
+            interval: 86400,
+        }
 
 rules:
     # 广告拦截
@@ -137,8 +201,14 @@ rules:
     # 直连
     - GEOSITE,cn,🎯 全球直连
     - GEOIP,cn,🎯 全球直连
+    - RULE-SET,ChinaDomain,🎯 全球直连
+    - RULE-SET,ChinaCompanyIp,🎯 全球直连
     - RULE-SET,direct-list,🎯 全球直连
     - RULE-SET,lancidr,🎯 全球直连
+    - RULE-SET,ADD-DIRECT,🎯 全球直连
+    - RULE-SET,GoogleFCM,🎯 全球直连
+    - RULE-SET,GoogleCN,🎯 全球直连
+    - RULE-SET,Microsoft,🎯 全球直连
     - GEOSITE,steam@cn,🎯 全球直连
     - GEOSITE,private,🎯 全球直连
     - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🎯 全球直连
@@ -146,6 +216,8 @@ rules:
 
     # 走代理
     - GEOSITE,gfw,🚀 节点选择
+    - RULE-SET,ProxyMedia,🚀 节点选择
+    - RULE-SET,ProxyLite,🚀 节点选择
 
     # 默认
     - MATCH,🐟 漏网之鱼
