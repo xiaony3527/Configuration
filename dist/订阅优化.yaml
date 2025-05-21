@@ -78,6 +78,7 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '奈云 | '
+        filter: '韩国|日本|新加坡|香港|美国|马来西亚|阿根廷'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
 proxy-groups:
