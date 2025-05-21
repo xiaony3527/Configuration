@@ -201,7 +201,6 @@ rules:
 
     # 直连
     - GEOSITE,cn,🎯 全球直连
-    - GEOIP,cn,🎯 全球直连
     - RULE-SET,ChinaDomain,🎯 全球直连
     - RULE-SET,ChinaCompanyIp,🎯 全球直连
     - RULE-SET,direct-list,🎯 全球直连
