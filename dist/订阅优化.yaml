@@ -78,8 +78,7 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '奈云 | '
-        filter: '(?i)香港|日本|韩国|新加坡|美国|马来西亚|阿根廷'
-        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期|x3|*3'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
 proxy-groups:
     - name: 🚀 节点选择
@@ -201,6 +200,7 @@ rules:
 
     # 直连
     - GEOSITE,cn,🎯 全球直连
+    - GEOIP,cn,🎯 全球直连
     - RULE-SET,ChinaDomain,🎯 全球直连
     - RULE-SET,ChinaCompanyIp,🎯 全球直连
     - RULE-SET,direct-list,🎯 全球直连
