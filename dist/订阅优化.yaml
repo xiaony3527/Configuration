@@ -46,25 +46,7 @@ dns:
 # The above configuration can prevent DNS leakage, modify with caution
 
 proxy-providers:
-    1.lmspeed:
-        type: http
-        path: ./proxy_provider/LmSpeed.yaml
-        url: https://linka.lmscunb.cc:2087/api/v1/client/subscribe?token=54b0c4fa3cc0e162871fff26bca92ef9
-        interval: 21600
-        proxy: 🚀 节点选择
-        health-check:
-            enable: true
-            url: http://www.gstatic.com/generate_204
-            interval: 1800
-            timeout: 300
-            lazy: false
-            expected-status: 204
-        override:
-            additional-prefix: '龙猫云 | '
-        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
-        exclude-type: 'ss|http'
-
-    2.CherryLink:
+    CherryLink:
         type: http
         path: ./proxy_provider/CherryLink.yaml
         url: https://cherry.azureedge.net/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
@@ -78,14 +60,15 @@ proxy-providers:
             lazy: false
             expected-status: 204
         override:
-            additional-prefix: 'CherryLink| '
+            additional-prefix: 'CherryLink | '
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
-    3.qcjsd:
+    奈云:
         type: http
-        path: ./proxy_provider/qcjsd.yaml
-        url: https://8f3ff21d-7ea5-452d-b526-efc8c1b55e37.qcjsd.org/api/v1/client/subscribe?token=527410916ba2a4c62219d022ed249e21
+        path: ./proxy_provider/CherryLink.yaml
+        url: https://submit.xz61.cn:20443/api/v1/client/subscribe?token=cc16ae3333a8a4850b5417a2885723ac
         interval: 21600
+        proxy: 🚀 节点选择
         health-check:
             enable: true
             url: http://www.gstatic.com/generate_204
@@ -94,7 +77,7 @@ proxy-providers:
             lazy: false
             expected-status: 204
         override:
-            additional-prefix: '倾城极速 | '
+            additional-prefix: '奈云 | '
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
 proxy-groups:
@@ -153,6 +136,7 @@ rules:
 
     # 直连
     - GEOSITE,cn,🎯 全球直连
+    - GEOIP,cn,🎯 全球直连
     - RULE-SET,direct-list,🎯 全球直连
     - RULE-SET,lancidr,🎯 全球直连
     - GEOSITE,steam@cn,🎯 全球直连
@@ -162,9 +146,6 @@ rules:
 
     # 走代理
     - GEOSITE,gfw,🚀 节点选择
-    - DOMAIN-SUFFIX,speedtest.net,🚀 节点选择
-    - DOMAIN-SUFFIX,sider.ai,🚀 节点选择
-    - DOMAIN-SUFFIX,greasyfork.org,🚀 节点选择
 
     # 默认
     - MATCH,🐟 漏网之鱼
