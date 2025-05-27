@@ -65,7 +65,7 @@ proxy-providers:
 
     奈云:
         type: http
-        path: ./proxy_provider/CherryLink.yaml
+        path: ./proxy_provider/奈云.yaml
         url: https://submit.xz61.cn:20443/api/v1/client/subscribe?token=cc16ae3333a8a4850b5417a2885723ac
         interval: 21600
         proxy: 🚀 节点选择
