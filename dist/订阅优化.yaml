@@ -195,8 +195,10 @@ rules:
 
     # 包名| 进程 规则
     - PROCESS-NAME,telegram.exe,🎯 全球直连 # 电报
+    - PROCESS-NAME,AyuGram.exe,🎯 全球直连
     - PROCESS-NAME,verysync.exe,🎯 全球直连 # 威力同步
     - PROCESS-NAME,XshellCore.exe,🎯 全球直连 # xshell
+    - PROCESS-NAME,老猫变声一键包1.8.exe,🎯 全球直连
 
     # 直连
     - GEOSITE,cn,🎯 全球直连
