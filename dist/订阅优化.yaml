@@ -49,7 +49,7 @@ proxy-providers:
     CherryLink:
         type: http
         path: ./proxy_provider/CherryLink.yaml
-        url: https://cherry.azureedge.net/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
+        url: https://cherry.clash.ee/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
         interval: 21600
         proxy: 🚀 节点选择
         health-check:
@@ -61,6 +61,7 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: 'CherryLink | '
+        filter: '(?!)香港|新加坡|日本|台湾'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
     奈云:
@@ -78,6 +79,8 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '奈云 | '
+        filter: '(?!)香港|新加坡|日本|台湾'
+        exclude-type: 'ss'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
 proxy-groups:
@@ -220,7 +223,7 @@ rules:
     - GEOSITE,gfw,🚀 节点选择
     - RULE-SET,ProxyMedia,🚀 节点选择
     - RULE-SET,ProxyLite,🚀 节点选择
-    - DOMAIN-KEYWORD,missav,🚀 节点选择
+    - DOMAIN-KEYWORD,missav,🚀 节点选择w
 
     # 默认
     - MATCH,🐟 漏网之鱼
