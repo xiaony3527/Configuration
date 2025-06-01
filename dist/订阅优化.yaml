@@ -223,7 +223,7 @@ rules:
     - GEOSITE,gfw,🚀 节点选择
     - RULE-SET,ProxyMedia,🚀 节点选择
     - RULE-SET,ProxyLite,🚀 节点选择
-    - DOMAIN-KEYWORD,missav,🚀 节点选择w
+    - DOMAIN-KEYWORD,missav,🚀 节点选择
 
     # 默认
     - MATCH,🐟 漏网之鱼
