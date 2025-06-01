@@ -81,7 +81,7 @@ proxy-providers:
             additional-prefix: '奈云 | '
         filter: '(?!)香港|新加坡|日本|台湾'
         exclude-type: 'ss'
-        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
+        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期|失效|地址|大陆访问|Telegram群组|欢迎加入'
 
 proxy-groups:
     - name: 🚀 节点选择
