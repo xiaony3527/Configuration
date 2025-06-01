@@ -61,7 +61,7 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: 'CherryLink | '
-        filter: '(?!)香港|新加坡|日本|台湾'
+        filter: '(?i)港|新|日|美|台|hk|sg|jp|tw|us'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
 
     奈云:
@@ -79,7 +79,7 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '奈云 | '
-        filter: '(?!)香港|新加坡|日本|台湾'
+        filter: '(?i)港|新|日|美|台|hk|sg|jp|tw|us'
         exclude-type: 'ss'
         exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期|失效|地址|大陆访问|Telegram群组|欢迎加入'
 
