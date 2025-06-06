@@ -79,9 +79,9 @@ proxy-providers:
             expected-status: 204
         override:
             additional-prefix: '奈云 | '
-        filter: '(?i)港|新|日|美|台|hk|sg|jp|tw|us'
+        filter: '(?i)直连节点|IPLC'
         exclude-type: 'ss'
-        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期|失效|地址|大陆访问|Telegram群组|欢迎加入'
+        exclude-filter: ''
 
 proxy-groups:
     - name: 🚀 节点选择
