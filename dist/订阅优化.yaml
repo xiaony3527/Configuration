@@ -206,6 +206,7 @@ rules:
     # 直连
     - GEOSITE,cn,🎯 全球直连
     - GEOIP,cn,🎯 全球直连
+    - GEOSITE,tencent@cn,🎯 全球直连
     - RULE-SET,ChinaDomain,🎯 全球直连
     - RULE-SET,ChinaCompanyIp,🎯 全球直连
     - RULE-SET,direct-list,🎯 全球直连
@@ -221,6 +222,8 @@ rules:
 
     # 走代理
     - GEOSITE,gfw,🚀 节点选择
+    - GEOSITE,python,🚀 节点选择
+    - GEOSITE,tencent@!cn,🚀 节点选择
     - RULE-SET,ProxyMedia,🚀 节点选择
     - RULE-SET,ProxyLite,🚀 节点选择
     - DOMAIN-KEYWORD,missav,🚀 节点选择
