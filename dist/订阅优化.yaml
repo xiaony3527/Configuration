@@ -10,225 +10,209 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:
-    geoip: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat'
-    geosite: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat'
+  geoip: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
 geodata-loader: memconservative
 profile:
-    store-selected: true
-    store-fake-ip: true
+  store-selected: true
+  store-fake-ip: true
 
 # 以下配置可以防止DNS泄露，谨慎修改
 # The following configuration can prevent DNS leakage, modify with caution
 dns:
-    enable: true
-    ipv6: false
-    prefer-h3: true
-    listen: 0.0.0.0:1051
-    enhanced-mode: fake-ip
-    fake-ip-range: 198.18.0.1/16
-    nameserver:
-        - tls://8.8.4.4
-        - tls://1.1.1.1
-    nameserver-policy:
-        'geosite:cn':
-            - system
-            - 180.76.76.76
-            - 223.5.5.5
-    proxy-server-nameserver:
-        - 180.76.76.76
-        - 202.175.3.3
-        - 223.5.5.5
-    fake-ip-filter:
-        - '*.lan'
-        - '+.leigod.com'
-        - '+.wyjsq.com'
+  enable: true
+  ipv6: false
+  prefer-h3: true
+  listen: 0.0.0.0:1051
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - tls://8.8.4.4
+    - tls://1.1.1.1
+  nameserver-policy:
+    "geosite:cn":
+      - system
+      - 180.76.76.76
+      - 223.5.5.5
+  proxy-server-nameserver:
+    - 180.76.76.76
+    - 202.175.3.3
+    - 223.5.5.5
+  fake-ip-filter:
+    - "*.lan"
+    - "+.leigod.com"
+    - "+.wyjsq.com"
 # 以上配置可以防止DNS泄露，谨慎修改
 # The above configuration can prevent DNS leakage, modify with caution
 
 proxy-providers:
-    CherryLink:
-        type: http
-        path: ./proxy_provider/CherryLink.yaml
-        url: https://cherry.clash.ee/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
-        interval: 21600
-        proxy: 🚀 节点选择
-        health-check:
-            enable: true
-            url: http://www.gstatic.com/generate_204
-            interval: 1800
-            timeout: 300
-            lazy: false
-            expected-status: 204
-        override:
-            additional-prefix: 'CherryLink | '
-        filter: '(?i)港|新|日|美|台|hk|sg|jp|tw|us'
-        exclude-filter: '网址|流量|剩余|重置|到期|套餐|时间|过期'
-
-    奈云:
-        type: http
-        path: ./proxy_provider/奈云.yaml
-        url: https://submit.xz61.cn:20443/api/v1/client/subscribe?token=cc16ae3333a8a4850b5417a2885723ac
-        interval: 21600
-        proxy: 🚀 节点选择
-        health-check:
-            enable: true
-            url: http://www.gstatic.com/generate_204
-            interval: 1800
-            timeout: 300
-            lazy: false
-            expected-status: 204
-        override:
-            additional-prefix: '奈云 | '
-        filter: '(?i)直连节点|IPLC'
-        exclude-type: 'ss'
-        exclude-filter: ''
+  CherryLink:
+    type: http
+    path: ./proxy_provider/CherryLink.yaml
+    url: https://cherry.clash.ee/sub?target=clash&filename=CherryLink&url=https://cherryvpn.net/link/lqDCK4qIxaEE3loD?sub=2
+    interval: 21600
+    proxy: 🚀 节点选择
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 1800
+      timeout: 300
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "CherryLink | "
+    filter: "(?i)香港|新加坡|日本|美国|台湾"
+    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
 
 proxy-groups:
-    - name: 🚀 节点选择
-      type: select
-      proxies: [♻️ 自动选择]
-      include-all: true
+  - name: 🚀 节点选择
+    type: select
+    proxies: [♻️ 自动选择]
+    include-all: true
 
-    - name: ♻️ 自动选择
-      type: url-test
-      url: https://www.google.com/blank.html
-      interval: 600
-      tolerance: 50
-      include-all: true
+  - name: ♻️ 自动选择
+    type: url-test
+    url: https://www.google.com/blank.html
+    interval: 600
+    tolerance: 50
+    include-all: true
 
-    - name: 🎯 全球直连
-      type: select
-      proxies: [DIRECT, 🚀 节点选择, ♻️ 自动选择]
+  - name: 🎯 全球直连
+    type: select
+    proxies: [DIRECT, 🚀 节点选择, ♻️ 自动选择]
 
-    - name: 🛑 全球拦截
-      type: select
-      proxies: [REJECT, DIRECT]
+  - name: 🛑 全球拦截
+    type: select
+    proxies: [REJECT, DIRECT]
 
-    - name: 🐟 漏网之鱼
-      type: select
-      proxies: [🚀 节点选择, 🎯 全球直连, 🛑 全球拦截, ♻️ 自动选择]
-      include-all: true
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies: [🚀 节点选择, 🎯 全球直连, 🛑 全球拦截, ♻️ 自动选择]
+    include-all: true
 rule-providers:
-    direct-list:
-        type: http
-        url: https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/direct-list.txt
-        interval: 86400
-        path: ./ruleset/direct-list.txt
-        behavior: domain
-    AWAvenue:
-        type: http
-        url: https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml
-        interval: 86400
-        path: ./ruleset/AWAvenue.yaml
-        behavior: domain
-    lancidr:
-        type: http
-        behavior: ipcidr
-        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt'
-        path: ./ruleset/lancidr.yaml
-        interval: 86400
-    ADD-DIRECT:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvbmdDY2hhby9HbG9iYWxNZWRpYS1DbGFzaFJ1bGUvcmVmcy9oZWFkcy9tYWluL0FERC1ESVJFQ1QubGlzdA',
-            path: ./ruleset/rule-provider_ADD-DIRECT.yaml,
-            interval: 86400,
-        }
-    GoogleFCM:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUnVsZXNldC9Hb29nbGVGQ00ubGlzdA',
-            path: ./ruleset/rule-provider_GoogleFCM.yaml,
-            interval: 86400,
-        }
-    GoogleCN:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlQ04ubGlzdA',
-            path: ./ruleset/rule-provider_GoogleCN.yaml,
-            interval: 86400,
-        }
-    Microsoft:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvTWljcm9zb2Z0Lmxpc3Q',
-            path: ./ruleset/rule-provider_Microsoft.yaml,
-            interval: 86400,
-        }
-    ChinaDomain:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA',
-            path: ./ruleset/rule-provider_ChinaDomain.yaml,
-            interval: 86400,
-        }
-    ChinaCompanyIp:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFDb21wYW55SXAubGlzdA',
-            path: ./ruleset/rule-provider_ChinaCompanyIp.yaml,
-            interval: 86400,
-        }
-    ProxyMedia:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlNZWRpYS5saXN0',
-            path: ./ruleset/rule-provider_ProxyMedia.yaml,
-            interval: 86400,
-        }
-    ProxyLite:
-        {
-            type: http,
-            behavior: classical,
-            url: 'http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlMaXRlLmxpc3Q',
-            path: ./ruleset/rule-provider_ProxyLite.yaml,
-            interval: 86400,
-        }
+  direct-list:
+    type: http
+    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/direct-list.txt
+    interval: 86400
+    path: ./ruleset/direct-list.txt
+    behavior: domain
+  AWAvenue:
+    type: http
+    url: https://cdn.uura.cn/AWAvenue/AWAvenue-Ads-Rule-Clash.yaml
+    interval: 86400
+    path: ./ruleset/AWAvenue.yaml
+    behavior: domain
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+  ADD-DIRECT:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvbmdDY2hhby9HbG9iYWxNZWRpYS1DbGFzaFJ1bGUvcmVmcy9oZWFkcy9tYWluL0FERC1ESVJFQ1QubGlzdA",
+      path: ./ruleset/rule-provider_ADD-DIRECT.yaml,
+      interval: 86400,
+    }
+  GoogleFCM:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUnVsZXNldC9Hb29nbGVGQ00ubGlzdA",
+      path: ./ruleset/rule-provider_GoogleFCM.yaml,
+      interval: 86400,
+    }
+  GoogleCN:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlQ04ubGlzdA",
+      path: ./ruleset/rule-provider_GoogleCN.yaml,
+      interval: 86400,
+    }
+  Microsoft:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvTWljcm9zb2Z0Lmxpc3Q",
+      path: ./ruleset/rule-provider_Microsoft.yaml,
+      interval: 86400,
+    }
+  ChinaDomain:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA",
+      path: ./ruleset/rule-provider_ChinaDomain.yaml,
+      interval: 86400,
+    }
+  ChinaCompanyIp:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFDb21wYW55SXAubGlzdA",
+      path: ./ruleset/rule-provider_ChinaCompanyIp.yaml,
+      interval: 86400,
+    }
+  ProxyMedia:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlNZWRpYS5saXN0",
+      path: ./ruleset/rule-provider_ProxyMedia.yaml,
+      interval: 86400,
+    }
+  ProxyLite:
+    {
+      type: http,
+      behavior: classical,
+      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlMaXRlLmxpc3Q",
+      path: ./ruleset/rule-provider_ProxyLite.yaml,
+      interval: 86400,
+    }
 
 rules:
-    # 广告拦截
-    - RULE-SET,AWAvenue,🛑 全球拦截
+  # 广告拦截
+  - RULE-SET,AWAvenue,🛑 全球拦截
 
-    # 包名| 进程 规则
-    - PROCESS-NAME,telegram.exe,🎯 全球直连 # 电报
-    - PROCESS-NAME,AyuGram.exe,🎯 全球直连
-    - PROCESS-NAME,verysync.exe,🎯 全球直连 # 威力同步
-    - PROCESS-NAME,XshellCore.exe,🎯 全球直连 # xshell
-    - PROCESS-NAME,老猫变声一键包1.8.exe,🎯 全球直连
+  # 包名| 进程 规则
+  - PROCESS-NAME,telegram.exe,🎯 全球直连 # 电报
+  - PROCESS-NAME,AyuGram.exe,🎯 全球直连
+  - PROCESS-NAME,verysync.exe,🎯 全球直连 # 威力同步
+  - PROCESS-NAME,XshellCore.exe,🎯 全球直连 # xshell
+  - PROCESS-NAME,老猫变声一键包1.8.exe,🎯 全球直连
+  
+  # 高优先级
+  - DOMAIN-SUFFIX,soulapp.cn,🚀 节点选择
+  
+  # 直连
+  - GEOSITE,cn,🎯 全球直连
+  - GEOIP,cn,🎯 全球直连
+  - GEOSITE,tencent@cn,🎯 全球直连
+  - RULE-SET,ChinaDomain,🎯 全球直连
+  - RULE-SET,ChinaCompanyIp,🎯 全球直连
+  - RULE-SET,direct-list,🎯 全球直连
+  - RULE-SET,lancidr,🎯 全球直连
+  - RULE-SET,ADD-DIRECT,🎯 全球直连
+  - RULE-SET,GoogleFCM,🎯 全球直连
+  - RULE-SET,GoogleCN,🎯 全球直连
+  - GEOSITE,steam@cn,🎯 全球直连
+  - GEOSITE,private,🎯 全球直连
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🎯 全球直连
+  - DOMAIN-SUFFIX,googleapis.cn,🎯 全球直连
 
-    # 直连
-    - GEOSITE,cn,🎯 全球直连
-    - GEOIP,cn,🎯 全球直连
-    - GEOSITE,tencent@cn,🎯 全球直连
-    - RULE-SET,ChinaDomain,🎯 全球直连
-    - RULE-SET,ChinaCompanyIp,🎯 全球直连
-    - RULE-SET,direct-list,🎯 全球直连
-    - RULE-SET,lancidr,🎯 全球直连
-    - RULE-SET,ADD-DIRECT,🎯 全球直连
-    - RULE-SET,GoogleFCM,🎯 全球直连
-    - RULE-SET,GoogleCN,🎯 全球直连
-    - RULE-SET,Microsoft,🎯 全球直连
-    - GEOSITE,steam@cn,🎯 全球直连
-    - GEOSITE,private,🎯 全球直连
-    - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🎯 全球直连
-    - DOMAIN-SUFFIX,googleapis.cn,🎯 全球直连
+  # 走代理
+  - GEOSITE,gfw,🚀 节点选择
+  - GEOSITE,python,🚀 节点选择
+  - GEOSITE,tencent@!cn,🚀 节点选择
+  - RULE-SET,ProxyMedia,🚀 节点选择
+  - RULE-SET,ProxyLite,🚀 节点选择
+  - DOMAIN-KEYWORD,missav,🚀 节点选择
+  - DOMAIN-SUFFIX,nexusmods.com,🚀 节点选择
+  - DOMAIN-SUFFIX,sider.ai,🚀 节点选择
+  - RULE-SET,Microsoft,🚀 节点选择
 
-    # 走代理
-    - GEOSITE,gfw,🚀 节点选择
-    - GEOSITE,python,🚀 节点选择
-    - GEOSITE,tencent@!cn,🚀 节点选择
-    - RULE-SET,ProxyMedia,🚀 节点选择
-    - RULE-SET,ProxyLite,🚀 节点选择
-    - DOMAIN-KEYWORD,missav,🚀 节点选择
-    - DOMAIN-SUFFIX,nexusmods.com,🚀 节点选择
-    - DOMAIN-SUFFIX,sider.ai,🚀 节点选择
-
-    # 默认
-    - MATCH,🐟 漏网之鱼
+  # 默认
+  - MATCH,🐟 漏网之鱼
