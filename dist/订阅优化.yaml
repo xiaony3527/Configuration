@@ -184,6 +184,7 @@ rules:
 
   # 高优先级
   - DOMAIN-SUFFIX,soulapp.cn,🚀 节点选择
+  - DOMAIN-REGEX,oauth.ihomepage,🚀 节点选择
 
   # 直连
   - GEOSITE,cn,🎯 全球直连
