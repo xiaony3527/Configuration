@@ -49,7 +49,7 @@ proxy-providers:
   LMspeed:
     type: http
     path: ./proxy_provider/LMspeed.yaml
-    url: https://linka.lmscunb.cc:2087/api/v1/client/subscribe?token=54b0c4fa3cc0e162871fff26bca92ef9
+    url: https://api.wcc.best/sub?target=clash&url=https%3A%2F%2Flinka.lmscunb.cc%3A2087%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D54b0c4fa3cc0e162871fff26bca92ef9&insert=false
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
@@ -62,7 +62,7 @@ proxy-providers:
     override:
       additional-prefix: "LMspeed | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
-    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
+#    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
     
 proxy-groups:
   - name: 🚀 节点选择
