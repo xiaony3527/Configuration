@@ -60,7 +60,7 @@ proxy-providers:
       lazy: false
       expected-status: 204
     override:
-      additional-prefix: "CherryLink | "
+      additional-prefix: "LMspeed | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
     exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
     
