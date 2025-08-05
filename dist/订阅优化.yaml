@@ -63,6 +63,24 @@ proxy-providers:
       additional-prefix: "LMspeed | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
 #    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
+
+  Starlink:
+    type: http
+    path: ./proxy_provider/Starlink.yaml
+    url: https://xship.top/v1/subscribe?starlink=promax@TlsfkQGJL9INDJUQhleJCwq1
+    interval: 21600
+    proxy: 🚀 节点选择
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 1800
+      timeout: 300
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "星链 | "
+    filter: "(?i)香港|新加坡|日本|美国|台湾"
+#    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
     
 proxy-groups:
   - name: 🚀 节点选择
