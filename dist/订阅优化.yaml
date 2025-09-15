@@ -17,6 +17,17 @@ profile:
   store-selected: true
   store-fake-ip: true
 
+# TUN模式配置
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - 198.18.0.2:53
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  mtu: 1500
+
 # 以下配置可以防止DNS泄露，谨慎修改
 # The following configuration can prevent DNS leakage, modify with caution
 dns:
@@ -26,22 +37,97 @@ dns:
   listen: 0.0.0.0:1051
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - "localhost"
+    - "localhost.*"
+    - "127.0.0.1"
+    - "::1"
+    - "10.*"
+    - "172.16.*"
+    - "172.17.*"
+    - "172.18.*"
+    - "172.19.*"
+    - "172.20.*"
+    - "172.21.*"
+    - "172.22.*"
+    - "172.23.*"
+    - "172.24.*"
+    - "172.25.*"
+    - "172.26.*"
+    - "172.27.*"
+    - "172.28.*"
+    - "172.29.*"
+    - "172.30.*"
+    - "172.31.*"
+    - "192.168.*"
+    - "+.leigod.com"
+    - "+.wyjsq.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.uu.163.com"
+    - "+.uu.boce.com"
+    - "+.jiasu.baidu.com"
+    - "+.jiasu.qiyi.com"
+    - "+.speedtest.cn"
+    - "+.netease.com"
+    - "+.xunyou.com"
+    - "+.bilibili.com"
+    - "+.akamai.com"
+    - "+.cdnetworks.com"
+    - "+.fastly.net"
+    - "+.cloudflare.com"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 8.8.8.8
+    - 1.1.1.1
   nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
     - tls://8.8.4.4
     - tls://1.1.1.1
   nameserver-policy:
     "geosite:cn":
-      - system
-      - 180.76.76.76
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
       - 223.5.5.5
+      - 119.29.29.29
+    "geosite:geolocation-!cn":
+      - tls://8.8.4.4
+      - tls://1.1.1.1
+      - https://dns.google/dns-query
+      - https://cloudflare-dns.com/dns-query
+    "domain:msftconnecttest.com":
+      - system
+    "domain:msftncsi.com":
+      - system
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - tls://1.0.0.1
+    - tls://8.8.4.4
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+    domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.twitter.com"
+      - "+.youtube.com"
+      - "+.instagram.com"
+      - "+.googleapis.com"
   proxy-server-nameserver:
     - 180.76.76.76
     - 202.175.3.3
     - 223.5.5.5
-  fake-ip-filter:
-    - "*.lan"
-    - "+.leigod.com"
-    - "+.wyjsq.com"
 # 以上配置可以防止DNS泄露，谨慎修改
 # The above configuration can prevent DNS leakage, modify with caution
 
@@ -62,12 +148,12 @@ proxy-providers:
     override:
       additional-prefix: "LMspeed | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
-#    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
+    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
 
-  Starlink:
+  xfltd:
     type: http
-    path: ./proxy_provider/Starlink.yaml
-    url: https://xship.top/v1/subscribe?starlink=promax@TlsfkQGJL9INDJUQhleJCwq1
+    path: ./proxy_provider/xfltd.yaml
+    url: https://api.rss.xfsub.cc/?841af0129f46285863273644e0a28fab
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
@@ -78,9 +164,9 @@ proxy-providers:
       lazy: false
       expected-status: 204
     override:
-      additional-prefix: "星链 | "
+      additional-prefix: "xfltd | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
-#    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
+    exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
     
 proxy-groups:
   - name: 🚀 节点选择
@@ -127,69 +213,53 @@ rule-providers:
     path: ./ruleset/lancidr.yaml
     interval: 86400
   ADD-DIRECT:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvbmdDY2hhby9HbG9iYWxNZWRpYS1DbGFzaFJ1bGUvcmVmcy9oZWFkcy9tYWluL0FERC1ESVJFQ1QubGlzdA",
-      path: ./ruleset/rule-provider_ADD-DIRECT.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvbmdDY2hhby9HbG9iYWxNZWRpYS1DbGFzaFJ1bGUvcmVmcy9oZWFkcy9tYWluL0FERC1ESVJFQ1QubGlzdA"
+    path: ./ruleset/rule-provider_ADD-DIRECT.yaml
+    interval: 86400
   GoogleFCM:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUnVsZXNldC9Hb29nbGVGQ00ubGlzdA",
-      path: ./ruleset/rule-provider_GoogleFCM.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlRkNNLmxpc3Q"
+    path: ./ruleset/rule-provider_GoogleFCM.yaml
+    interval: 86400
   GoogleCN:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlQ04ubGlzdA",
-      path: ./ruleset/rule-provider_GoogleCN.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlQ04ubGlzdA"
+    path: ./ruleset/rule-provider_GoogleCN.yaml
+    interval: 86400
   Microsoft:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvTWljcm9zb2Z0Lmxpc3Q",
-      path: ./ruleset/rule-provider_Microsoft.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvTWljcm9zb2Z0Lmxpc3Q"
+    path: ./ruleset/rule-provider_Microsoft.yaml
+    interval: 86400
   ChinaDomain:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA",
-      path: ./ruleset/rule-provider_ChinaDomain.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA"
+    path: ./ruleset/rule-provider_ChinaDomain.yaml
+    interval: 86400
   ChinaCompanyIp:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFDb21wYW55SXAubGlzdA",
-      path: ./ruleset/rule-provider_ChinaCompanyIp.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFDb21wYW55SXAubGlzdA"
+    path: ./ruleset/rule-provider_ChinaCompanyIp.yaml
+    interval: 86400
   ProxyMedia:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlNZWRpYS5saXN0",
-      path: ./ruleset/rule-provider_ProxyMedia.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlNZWRpYS5saXN0"
+    path: ./ruleset/rule-provider_ProxyMedia.yaml
+    interval: 86400
   ProxyLite:
-    {
-      type: http,
-      behavior: classical,
-      url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlMaXRlLmxpc3Q",
-      path: ./ruleset/rule-provider_ProxyLite.yaml,
-      interval: 86400,
-    }
+    type: http
+    behavior: classical
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUHJveHlMaXRlLmxpc3Q"
+    path: ./ruleset/rule-provider_ProxyLite.yaml
+    interval: 86400
 
 rules:
   # 广告拦截
@@ -199,6 +269,15 @@ rules:
   - PROCESS-NAME,verysync.exe,🎯 全球直连 # 威力同步
   - PROCESS-NAME,XshellCore.exe,🎯 全球直连 # xshell
   - PROCESS-NAME,LM Studio.exe,🎯 全球直连
+
+  # 大陆DNS规则
+  - DOMAIN-SUFFIX,doh.pub,🎯 全球直连
+  - DOMAIN-SUFFIX,dns.alidns.com,🎯 全球直连
+  - DOMAIN,223.5.5.5,🎯 全球直连
+  - DOMAIN,223.6.6.6,🎯 全球直连
+  - DOMAIN,119.29.29.29,🎯 全球直连
+  - DOMAIN,180.76.76.76,🎯 全球直连
+  - DOMAIN,114.114.114.114,🎯 全球直连
 
   # 高优先级
   - DOMAIN-SUFFIX,soulapp.cn,🚀 节点选择
@@ -228,8 +307,14 @@ rules:
   - RULE-SET,ProxyLite,🚀 节点选择
   - DOMAIN-KEYWORD,missav,🚀 节点选择
   - DOMAIN-SUFFIX,nexusmods.com,🚀 节点选择
-  - DOMAIN-SUFFIX,sider.ai,🚀 节点选择
   - RULE-SET,Microsoft,🚀 节点选择
 
   # 默认
+  - GEOIP,!cn,🐟 漏网之鱼
+  - GEOSITE,!cn,🐟 漏网之鱼
+  
+  # DNS端口规则 - 防止未知境内DNS泄露
+  - DST-PORT,53,🎯 全球直连
+  - SRC-PORT,53,🎯 全球直连
+  
   - MATCH,🐟 漏网之鱼
