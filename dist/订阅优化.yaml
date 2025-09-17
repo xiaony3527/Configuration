@@ -221,7 +221,7 @@ rule-providers:
   GoogleFCM:
     type: http
     behavior: classical
-    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvR29vZ2xlRkNNLmxpc3Q"
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvUnVsZXNldC9Hb29nbGVGQ00ubGlzdA"
     path: ./ruleset/rule-provider_GoogleFCM.yaml
     interval: 86400
   GoogleCN:
@@ -239,7 +239,7 @@ rule-providers:
   ChinaDomain:
     type: http
     behavior: classical
-    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA"
+    url: "http://47.76.80.41:50001/getruleset?type=6&url=aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXNτεIvQ2xhc2gvQ2hpbmFEb21haW4ubGlzdA"
     path: ./ruleset/rule-provider_ChinaDomain.yaml
     interval: 86400
   ChinaCompanyIp:
