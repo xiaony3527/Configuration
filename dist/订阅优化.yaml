@@ -141,9 +141,9 @@ proxy-providers:
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 1800
-      timeout: 300
-      lazy: false
+      interval: 900
+      timeout: 5000
+      lazy: true
       expected-status: 204
     override:
       additional-prefix: "LMspeed | "
@@ -159,9 +159,9 @@ proxy-providers:
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 1800
-      timeout: 300
-      lazy: false
+      interval: 900
+      timeout: 5000
+      lazy: true
       expected-status: 204
     override:
       additional-prefix: "xfltd | "
@@ -171,28 +171,41 @@ proxy-providers:
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    proxies: [♻️ 自动选择]
+    proxies: [🔄 智能切换, ♻️ 自动选择]
     include-all: true
 
   - name: ♻️ 自动选择
     type: url-test
-    url: https://www.google.com/blank.html
-    interval: 600
-    tolerance: 50
+    url: https://www.google.com/generate_204
+    interval: 180
+    tolerance: 150
+    timeout: 5000
+    include-all: true
+
+  - name: 🔄 智能切换
+    type: fallback
+    url: https://www.google.com/generate_204
+    interval: 300
+    timeout: 5000
     include-all: true
 
   - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 🚀 节点选择, ♻️ 自动选择]
+    proxies: [DIRECT]
 
   - name: 🛑 全球拦截
     type: select
-    proxies: [REJECT, DIRECT]
+    proxies: [REJECT]
 
+  - name: AMD驱动
+    type: select
+    proxies: [🎯 全球直连, 🚀 节点选择]
+    
   - name: 🐟 漏网之鱼
     type: select
-    proxies: [🚀 节点选择, 🎯 全球直连, 🛑 全球拦截, ♻️ 自动选择]
+    proxies: [🚀 节点选择, 🎯 全球直连, 🛑 全球拦截]
     include-all: true
+    
 rule-providers:
   direct-list:
     type: http
@@ -282,6 +295,15 @@ rules:
   # 高优先级
   - DOMAIN-SUFFIX,soulapp.cn,🚀 节点选择
   - DOMAIN-REGEX,oauth.ihomepage,🚀 节点选择
+
+  # AMD驱动下载
+  - DOMAIN-SUFFIX,amd.com,AMD驱动
+  - DOMAIN-SUFFIX,amdnb.com,AMD驱动
+  - DOMAIN-SUFFIX,amd.com.cn,AMD驱动
+  - DOMAIN-SUFFIX,driver.amd.com,AMD驱动
+  - DOMAIN-SUFFIX,drivers.amd.com,AMD驱动
+  - DOMAIN-SUFFIX,download.amd.com,AMD驱动
+  - DOMAIN-SUFFIX,support.amd.com,AMD驱动
 
   # 直连
   - GEOSITE,cn,🎯 全球直连
