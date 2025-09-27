@@ -153,7 +153,7 @@ proxy-providers:
   xfltd:
     type: http
     path: ./proxy_provider/xfltd.yaml
-    url: https://api.rss.xfsub.cc/?841af0129f46285863273644e0a28fab
+    url: https://api.rss.xfsub.cc/?7f42efd28537cac5b4c692640ff9611d
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
