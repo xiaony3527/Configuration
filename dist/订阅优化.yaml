@@ -1,135 +1,19 @@
-mode: rule
-ipv6: false
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
 log-level: info
-mixed-port: 10000
-unified-delay: true
-tcp-concurrent: true
-find-process-mode: strict
-global-client-fingerprint: chrome
-geodata-mode: true
-geo-auto-update: true
-geo-update-interval: 24
-geox-url:
-  geoip: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-  geosite: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-geodata-loader: memconservative
-profile:
-  store-selected: true
-  store-fake-ip: true
-
-# TUN模式配置
-tun:
-  enable: true
-  stack: system
-  dns-hijack:
-    - 198.18.0.2:53
-  auto-route: true
-  auto-detect-interface: true
-  strict-route: true
-  mtu: 1500
-
-# 以下配置可以防止DNS泄露，谨慎修改
-# The following configuration can prevent DNS leakage, modify with caution
+external-controller: :9090
 dns:
   enable: true
-  ipv6: false
-  prefer-h3: true
-  listen: 0.0.0.0:1051
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
-    - "*.localdomain"
-    - "*.example"
-    - "*.test"
-    - "*.local"
-    - "*.home.arpa"
-    - "localhost"
-    - "localhost.*"
-    - "127.0.0.1"
-    - "::1"
-    - "10.*"
-    - "172.16.*"
-    - "172.17.*"
-    - "172.18.*"
-    - "172.19.*"
-    - "172.20.*"
-    - "172.21.*"
-    - "172.22.*"
-    - "172.23.*"
-    - "172.24.*"
-    - "172.25.*"
-    - "172.26.*"
-    - "172.27.*"
-    - "172.28.*"
-    - "172.29.*"
-    - "172.30.*"
-    - "172.31.*"
-    - "192.168.*"
-    - "+.leigod.com"
-    - "+.wyjsq.com"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - "+.uu.163.com"
-    - "+.uu.boce.com"
-    - "+.jiasu.baidu.com"
-    - "+.jiasu.qiyi.com"
-    - "+.speedtest.cn"
-    - "+.netease.com"
-    - "+.xunyou.com"
-    - "+.bilibili.com"
-    - "+.akamai.com"
-    - "+.cdnetworks.com"
-    - "+.fastly.net"
-    - "+.cloudflare.com"
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-    - 8.8.8.8
-    - 1.1.1.1
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
-    - tls://8.8.4.4
-    - tls://1.1.1.1
-  nameserver-policy:
-    "geosite:cn":
-      - https://doh.pub/dns-query
-      - https://dns.alidns.com/dns-query
-      - 223.5.5.5
-      - 119.29.29.29
-    "geosite:geolocation-!cn":
-      - tls://8.8.4.4
-      - tls://1.1.1.1
-      - https://dns.google/dns-query
-      - https://cloudflare-dns.com/dns-query
-    "domain:msftconnecttest.com":
-      - system
-    "domain:msftncsi.com":
-      - system
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-    - tls://1.0.0.1
-    - tls://8.8.4.4
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-    domain:
-      - "+.google.com"
-      - "+.facebook.com"
-      - "+.twitter.com"
-      - "+.youtube.com"
-      - "+.instagram.com"
-      - "+.googleapis.com"
-  proxy-server-nameserver:
-    - 180.76.76.76
-    - 202.175.3.3
+    - 119.29.29.29
     - 223.5.5.5
-# 以上配置可以防止DNS泄露，谨慎修改
-# The above configuration can prevent DNS leakage, modify with caution
+  fallback:
+    - 8.8.8.8
+    - 8.8.4.4
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
 
 proxy-providers:
   LMspeed:
