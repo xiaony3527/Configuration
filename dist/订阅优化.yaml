@@ -135,7 +135,7 @@ proxy-providers:
   LMspeed:
     type: http
     path: ./proxy_provider/LMspeed.yaml
-    url: https://api.wcc.best/sub?target=clash&url=https%3A%2F%2Flinka.lmscunb.cc%3A2087%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D54b0c4fa3cc0e162871fff26bca92ef9&insert=false
+    url: https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Flinka.lmscunb.cc%3A2087%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D54b0c4fa3cc0e162871fff26bca92ef9&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2Fcmliu%2FACL4SSR%2Fmain%2FClash%2Fconfig%2FACL4SSR_Online.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
@@ -149,11 +149,11 @@ proxy-providers:
       additional-prefix: "LMspeed | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
     exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
-
-  xfltd:
+    
+  XFLTD:
     type: http
-    path: ./proxy_provider/xfltd.yaml
-    url: https://api.xfsub.cc/cctv/user/client/get?token=8130c690fb70d932603ea4a2251bd74d
+    path: ./proxy_provider/XFLTD.yaml
+    url: https://dash.xf.kg/cctv/user/client/get?token=c71949bccd6abd4e7ed1ce6326b03d5b
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
@@ -164,10 +164,10 @@ proxy-providers:
       lazy: true
       expected-status: 204
     override:
-      additional-prefix: "xfltd | "
+      additional-prefix: "XFLTD | "
     filter: "(?i)香港|新加坡|日本|美国|台湾"
     exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
-    
+
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -329,7 +329,7 @@ rules:
   - RULE-SET,ProxyLite,🚀 节点选择
   - DOMAIN-KEYWORD,missav,🚀 节点选择
   - DOMAIN-SUFFIX,nexusmods.com,🚀 节点选择
-  - RULE-SET,Microsoft,🚀 节点选择
+  - RULE-SET,Microsoft,🎯 全球直连
 
   # 默认
   - GEOIP,!cn,🐟 漏网之鱼
