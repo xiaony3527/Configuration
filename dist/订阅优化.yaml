@@ -30,14 +30,13 @@ proxy-providers:
       lazy: true
       expected-status: 204
     override:
-      additional-prefix: "LMspeed | "
-    filter: "(?i)香港|新加坡|日本|美国|台湾"
+      additional-prefix: "龙猫 | "
     exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
     
-  XFLTD:
+  Cherry:
     type: http
-    path: ./proxy_provider/XFLTD.yaml
-    url: https://dash.xf.kg/cctv/user/client/get?token=c71949bccd6abd4e7ed1ce6326b03d5b
+    path: ./proxy_provider/Cherry.yaml
+    url: https://cdn.windowsrss.cv/smart/lqDCK4qIxaEE3loD
     interval: 21600
     proxy: 🚀 节点选择
     health-check:
@@ -48,8 +47,7 @@ proxy-providers:
       lazy: true
       expected-status: 204
     override:
-      additional-prefix: "XFLTD | "
-    filter: "(?i)香港|新加坡|日本|美国|台湾"
+      additional-prefix: "樱桃 | "
     exclude-filter: "网址|流量|剩余|重置|到期|套餐|时间|过期"
 
 proxy-groups:
